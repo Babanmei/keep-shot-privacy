@@ -23,12 +23,12 @@
     sel.value = getLang();
     sel.addEventListener('change', function () {
       try { localStorage.setItem('lang', sel.value); } catch (e) {}
-      apply();
+      apply(sel.value);
     });
   }
 
-  function apply() {
-    var lang = getLang();
+  function apply(lang) {
+    lang = lang || getLang();
     var data = window.I18N[lang];
     document.documentElement.lang = lang;
     if (window.renderPage) window.renderPage(data);
