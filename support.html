@@ -8,53 +8,35 @@
 </head>
 <body>
 <div class="wrap">
+  <div class="topbar">
+    <div class="brand">Keep Shot</div>
+    <select id="langSwitch" class="lang-switch" aria-label="Language"></select>
+  </div>
   <div class="hero">
     <div class="logo">Keep Shot</div>
-    <div class="tag">Support · 支持</div>
+    <div class="tag" id="tag">Support</div>
   </div>
-
-  <div class="card">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:babanmei666@gmail.com">babanmei666@gmail.com</a><br>
-       Issues &amp; feedback: <a href="https://github.com/Babanmei/keep_shot/issues">GitHub Issues</a></p>
-
-    <h2>FAQ</h2>
-
-    <h3>Photo permission denied / 照片权限被拒</h3>
-    <p>Go to <strong>Settings → Keep Shot</strong> on your iPhone and allow photo access, then reopen the app.<br>
-       请在 iPhone 的<strong>「设置 → Keep Shot」</strong>中允许照片访问，再重新打开应用。</p>
-
-    <h3>Storage unavailable / 存储空间不足</h3>
-    <p>Free up space on the destination (iPhone or external drive) and try the backup again.<br>
-       请清理目标位置（iPhone 或外接磁盘）的空间后重试备份。</p>
-
-    <h3>Backup interrupted / 备份中断</h3>
-    <p>Already-transferred files are not duplicated. Reconnect and resume — the app continues from where it left off.<br>
-       已传输的文件不会重复传输。重新连接后续传即可，应用会从中断处继续。</p>
-
-    <h3>Verification failed / 验证失败</h3>
-    <p>If a file fails hash verification, it is <strong>never deleted</strong> from your library. Re-run the backup for that item.<br>
-       若文件哈希校验失败，它<strong>不会被删除</strong>。请对该项目重新备份。</p>
-
-    <h3>Delete failed / 删除失败</h3>
-    <p>Some photos could not be deleted. Wait a moment and retry; items that failed stay in your library.<br>
-       部分照片无法删除时，请稍后重试，未成功删除的会保留在相册中。</p>
-
-    <h3>How do I recover cleaned photos? / 如何恢复已清理的照片？</h3>
-    <p>Cleaned photos go to the iPhone <strong>"Recently Deleted"</strong> album and can be recovered within 30 days.<br>
-       被清理的照片会进入 iPhone 的<strong>「最近删除」</strong>相簿，30 天内可恢复。</p>
-
-    <h3>How does backup work? / 备份如何工作？</h3>
-    <p>Copy → Verify (hash) → Delete. The app always verifies a file before removing the original, so your photos are never lost.<br>
-       流程为：复制 → 校验（哈希）→ 删除。应用始终先校验再删除原文件，确保照片不丢失。</p>
-  </div>
-
+  <div class="card" id="content"></div>
   <div class="nav">
-    <a href="index.html">Home</a>
-    <a href="privacy.html">Privacy</a>
+    <a id="navHome" href="index.html">Home</a>
+    <a id="navPrivacy" href="privacy.html">Privacy</a>
   </div>
-
   <div class="footer">© 2026 Keep Shot. All rights reserved.</div>
 </div>
+<script src="i18n.js"></script>
+<script src="site.js"></script>
+<script>
+window.renderPage = function (d) {
+  document.title = 'Keep Shot — ' + d.support.title;
+  document.getElementById('tag').textContent = d.support.title;
+  document.getElementById('navHome').textContent = d.nav.home;
+  document.getElementById('navPrivacy').textContent = d.nav.privacy;
+  var html = '<h2>' + d.nav.support + '</h2>';
+  html += '<p>' + d.support.contact + '</p>';
+  html += '<h2>FAQ</h2>';
+  d.support.faqs.forEach(function (f) { html += '<h3>' + f.q + '</h3><p>' + f.a + '</p>'; });
+  document.getElementById('content').innerHTML = html;
+};
+</script>
 </body>
 </html>

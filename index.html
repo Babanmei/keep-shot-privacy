@@ -8,32 +8,50 @@
 </head>
 <body>
 <div class="wrap">
+  <div class="topbar">
+    <div class="brand">Keep Shot</div>
+    <select id="langSwitch" class="lang-switch" aria-label="Language"></select>
+  </div>
   <div class="hero">
     <div class="logo">Keep Shot</div>
-    <div class="tag">AI keeps your best photos, safely backs up the rest, and frees up space.</div>
+    <div class="tag" id="tagline"></div>
   </div>
-
-  <div class="card">
-    <p>Keep Shot uses on-device AI to help you keep only the photos worth keeping. It finds duplicates, similar shots, blurry images, and screenshots you no longer need — then recommends the best photo in each group so <strong>you</strong> decide what to clean. All analysis runs locally; your photos are not uploaded by default.</p>
-  </div>
-
-  <div class="card">
-    <h2>Privacy by design</h2>
-    <p>Photos go to <strong>Recently Deleted</strong> (recoverable for 30 days), never permanently deleted without your choice. Optional backup verifies every file with a hash before removal. Read the full policy:</p>
-    <div class="nav" style="margin-top:14px">
-      <a href="privacy.html">Privacy Policy →</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>Need help?</h2>
-    <p>Find answers to common questions about permissions, backup, and recovery:</p>
-    <div class="nav" style="margin-top:14px">
-      <a href="support.html">Support &amp; FAQ →</a>
-    </div>
-  </div>
-
+  <div class="card" id="content"></div>
   <div class="footer">© 2026 Keep Shot. All rights reserved.</div>
 </div>
+<script src="i18n.js"></script>
+<script src="site.js"></script>
+<script>
+var INDEX = {
+  en: { tagline: "AI keeps your best photos, safely backs up the rest, and frees up space.",
+    cards: '<p>Keep Shot uses on-device AI to help you keep only the photos worth keeping. It finds duplicates, similar shots, blurry images, and screenshots you no longer need — then recommends the best photo in each group so <strong>you</strong> decide what to clean. All analysis runs locally; your photos are not uploaded by default.</p><h2>Privacy by design</h2><p>Photos go to <strong>Recently Deleted</strong> (recoverable for 30 days), never permanently deleted without your choice. Optional backup verifies every file with a hash before removal. Read the full policy:</p><div class="nav" style="margin-top:14px"><a href="privacy.html">__PRIVACY__ →</a></div><h2>Need help?</h2><p>Find answers to common questions about permissions, backup, and recovery:</p><div class="nav" style="margin-top:14px"><a href="support.html">__SUPPORT__ →</a></div>' },
+  zh: { tagline: "AI 帮你留住最好的照片，安全备份其余，并释放空间。",
+    cards: '<p>Keep Shot 用设备端 AI 帮你只留下值得保留的照片。它能找出重复、相似、模糊以及不再需要的截图，并在每组中推荐最佳照片，由<strong>你</strong>决定清理什么。所有分析都在本地运行，照片默认不上传。</p><h2>隐私优先</h2><p>照片会进入<strong>「最近删除」</strong>（30 天内可恢复），除非你选择否则绝不永久删除。可选的备份在删除前逐张做哈希校验。查看完整政策：</p><div class="nav" style="margin-top:14px"><a href="privacy.html">__PRIVACY__ →</a></div><h2>需要帮助？</h2><p>查看关于权限、备份与恢复的常见问题：</p><div class="nav" style="margin-top:14px"><a href="support.html">__SUPPORT__ →</a></div>' },
+  ja: { tagline: "AI が最高の写真を残し、残りを安全にバックアップし、容量を確保します。",
+    cards: '<p>Keep Shot は端末内 AI で、残すべき写真だけを残す手助けをします。重複・類似・ぼやけ・不要なスクリーンショットを見つけ、各グループで最良の写真を提案し、<strong>あなた</strong>が清理を決めます。すべての分析はローカルで、写真は既定でアップロードされません。</p><h2>プライバシー優先</h2><p>写真は<strong>「最近削除」</strong>に入り（30 日間復元可）、あなたが選ばない限り永久削除されません。オプションのバックアップは削除前に各ファイルをハッシュ検証します。全文はこちら：</p><div class="nav" style="margin-top:14px"><a href="privacy.html">__PRIVACY__ →</a></div><h2>サポート</h2><p>権限・バックアップ・復元のよくある質問はこちら：</p><div class="nav" style="margin-top:14px"><a href="support.html">__SUPPORT__ →</a></div>' },
+  ko: { tagline: "AI가 최고의 사진은 남기고 나머지는 안전하게 백업하며 공간을 확보합니다。",
+    cards: '<p>Keep Shot은 기기 내 AI로 남길 가치가 있는 사진만 남기도록 돕습니다. 중복·유사·흐림·불필요한 스크린샷을 찾고 각 그룹에서 최적 사진을 제안해 <strong>당신</strong>이 정리를 결정합니다. 모든 분석은 로컬이며 사진은 기본적으로 업로드되지 않습니다.</p><h2>개인정보 우선</h2><p>사진은 <strong>“최근 삭제됨”</strong>으로 가며(30일간 복구 가능) 명시하지 않으면 영구 삭제되지 않습니다. 선택적 백업은 삭제 전 각 파일을 해시 검증합니다. 전체 정책:</p><div class="nav" style="margin-top:14px"><a href="privacy.html">__PRIVACY__ →</a></div><h2>도움이 필요하신가요?</h2><p>권한·백업·복원에 대한 자주 묻는 질문:</p><div class="nav" style="margin-top:14px"><a href="support.html">__SUPPORT__ →</a></div>' },
+  th: { tagline: "AI เก็บรูปที่ดีที่สุด สำรองส่วนที่เหลืออย่างปลอดภัย และปลดพื้นที่",
+    cards: '<p>Keep Shot ใช้ AI บนอุปกรณ์เพื่อช่วยให้คุณเก็บเฉพาะรูปที่คู่ควร รูปซ้ำ คล้าย จาง และสกรีนช็อตที่ไม่ต้องการจะถูกจัดกลุ่มและแนะนำรูปที่ดีที่สุดให้ <strong>คุณ</strong> เป็นคนตัดสิน การวิเคราะห์ทั้งหมดทำบนเครื่อง รูปไม่ถูกอัปโหลดตามค่าเริ่มต้น</p><h2>ความเป็นส่วนตัวก่อน</h2><p>รูปจะเข้า <strong>“ลบ recently”</strong> (กู้คืนได้ 30 วัน) ไม่ถูกลบถาวรหากคุณไม่เลือก สำรองแบบเลือกได้ตรวจสอบแฮชทุกไฟล์ก่อนลบ นโยบายฉบับเต็ม:</p><div class="nav" style="margin-top:14px"><a href="privacy.html">__PRIVACY__ →</a></div><h2>ต้องการความช่วยเหลือ?</h2><p>คำถามที่พบบ่อยเรื่องสิทธิ์ สำรอง และการกู้คืน:</p><div class="nav" style="margin-top:14px"><a href="support.html">__SUPPORT__ →</a></div>' },
+  fr: { tagline: "L’IA garde vos meilleures photos, sauvegarde le reste en sécurité et libère de l’espace。",
+    cards: '<p>Keep Shot utilise une IA sur l’appareil pour ne garder que les photos qui comptent. Elle trouve doublons, similaires, floues et captures inutiles, puis recommande la meilleure photo de chaque groupe pour que <strong>vous</strong> décidiez. Toute l’analyse est locale ; vos photos ne sont pas téléversées par défaut.</p><h2>Confidentialité d’abord</h2><p>Les photos vont dans <strong>« Récemment supprimés »</strong> (récupérables 30 jours), jamais supprimées définitivement sans votre choix. La sauvegarde optionnelle vérifie chaque fichier par hachage avant suppression. Politique complète :</p><div class="nav" style="margin-top:14px"><a href="privacy.html">__PRIVACY__ →</a></div><h2>Besoin d’aide ?</h2><p>Réponses aux questions courantes sur les autorisations, la sauvegarde et la restauration :</p><div class="nav" style="margin-top:14px"><a href="support.html">__SUPPORT__ →</a></div>' },
+  de: { tagline: "Die KI behält deine besten Fotos, sichert den Rest und schafft Platz。",
+    cards: '<p>Keep Shot nutzt eine KI auf dem Gerät, damit nur die Fotos bleiben, die zählen. Sie findet Duplikate, Ähnliche, Unscharfe und unnötige Screenshots und empfiehlt das beste Foto pro Gruppe, damit <strong>du</strong> entscheidest. Die gesamte Analyse ist lokal; deine Fotos werden standardmäßig nicht hochgeladen.</p><h2>Datenschutz zuerst</h2><p>Fotos landen in <strong>„Kürzlich gelöscht“</strong> (30 Tage wiederherstellbar), nie endgültig gelöscht ohne deine Wahl. Die optionale Sicherung verifiziert jede Datei per Hash vor dem Entfernen. Volle Richtlinie:</p><div class="nav" style="margin-top:14px"><a href="privacy.html">__PRIVACY__ →</a></div><h2>Hilfe nötig?</h2><p>Antworten auf häufige Fragen zu Berechtigungen, Sicherung und Wiederherstellung:</p><div class="nav" style="margin-top:14px"><a href="support.html">__SUPPORT__ →</a></div>' },
+  es: { tagline: "La IA conserva tus mejores fotos, respalda el resto con seguridad y libera espacio。",
+    cards: '<p>Keep Shot usa IA en el dispositivo para que solo queden las fotos que importan. Encuentra duplicados, similares, borrosas y capturas innecesarias, y recomienda la mejor foto de cada grupo para que <strong>tú</strong> decidas. Toda el análisis es local; tus fotos no se suben por defecto.</p><h2>Privacidad primero</h2><p>Las fotos van a <strong>“Eliminados recientemente”</strong> (recuperables 30 días), nunca eliminadas definitivamente sin tu elección. La copia opcional verifica cada archivo por hash antes de eliminar. Política completa:</p><div class="nav" style="margin-top:14px"><a href="privacy.html">__PRIVACY__ →</a></div><h2>¿Necesitas ayuda?</h2><p>Respuestas a preguntas comunes sobre permisos, copias y recuperación:</p><div class="nav" style="margin-top:14px"><a href="support.html">__SUPPORT__ →</a></div>' },
+  it: { tagline: "L’IA tiene le tue foto migliori, salva il resto in sicurezza e libera spazio。",
+    cards: '<p>Keep Shot usa un’IA sul dispositivo per conservare solo le foto che contano. Trova duplicati, simili, sfocate e screenshot inutili, poi consiglia la migliore di ogni gruppo così <strong>tu</strong> decidi. Tutta l’analisi è locale; le foto non vengono caricate per impostazione predefinita.</p><h2>Privacy prima di tutto</h2><p>Le foto vanno in <strong>“Eliminati di recente”</strong> (recuperabili 30 giorni), mai eliminate definitivamente senza la tua scelta. Il backup opzionale verifica ogni file con hash prima di rimuoverlo. Informativa completa:</p><div class="nav" style="margin-top:14px"><a href="privacy.html">__PRIVACY__ →</a></div><h2>Serve aiuto?</h2><p>Risposte alle domande comuni su permessi, backup e ripristino:</p><div class="nav" style="margin-top:14px"><a href="support.html">__SUPPORT__ →</a></div>' },
+  pt: { tagline: "A IA guarda suas melhores fotos, faz backup seguro do resto e libera espaço。",
+    cards: '<p>Keep Shot usa IA no dispositivo para manter apenas as fotos que importam. Encontra duplicatas, similares, embaçadas e capturas desnecessárias, e recomenda a melhor de cada grupo para que <strong>você</strong> decida. Toda a análise é local; suas fotos não são enviadas por padrão.</p><h2>Privacidade primeiro</h2><p>As fotos vão para <strong>“Excluídas recentemente”</strong> (recuperáveis em 30 dias), nunca excluídas permanentemente sem sua escolha. O backup opcional verifica cada arquivo por hash antes de remover. Política completa:</p><div class="nav" style="margin-top:14px"><a href="privacy.html">__PRIVACY__ →</a></div><h2>Precisa de ajuda?</h2><p>Respostas a perguntas comuns sobre permissões, backup e recuperação:</p><div class="nav" style="margin-top:14px"><a href="support.html">__SUPPORT__ →</a></div>' }
+};
+
+window.renderPage = function (d) {
+  var lang = document.documentElement.lang;
+  var idx = INDEX[lang] || INDEX.en;
+  document.getElementById('tagline').textContent = idx.tagline;
+  document.getElementById('content').innerHTML =
+    idx.cards.replace('__PRIVACY__', d.nav.privacy).replace('__SUPPORT__', d.nav.support);
+};
+</script>
 </body>
 </html>

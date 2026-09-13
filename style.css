@@ -27,3 +27,6 @@ a:hover{text-decoration:underline}
 .footer{text-align:center;color:var(--muted);font-size:13px;margin-top:40px}
 更新{display:none}
 .updated{text-align:center;color:var(--muted);font-size:13px;margin-bottom:8px}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin:8px 2px 4px}
+.brand{font-weight:700;font-size:15px;color:var(--muted)}
+.lang-switch{font:inherit;padding:6px 10px;border-radius:10px;border:1px solid #e5e5ea;background:#fff;color:var(--fg);cursor:pointer}
